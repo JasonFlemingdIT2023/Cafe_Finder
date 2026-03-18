@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height:100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#sidebar {
+    width: 380px;
+    background: #1a1a2e;
+    color: white;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+}
+
+#sidebar h1 {
+    font-size: 1.6rem;
+    color: #e2c4a0;
+}
+
+#search-box {
+    display: flex;
+    gap: 8px;
+}
+
+#search-input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #2a2a4a;
+    color: white;
+    font-size: 0.95rem;
+}
+
+#search-input::placeholder {
+    color: #888;
+}
