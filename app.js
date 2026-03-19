@@ -106,7 +106,7 @@ function createMarker(place) {
 
 //dynamic cafe cards
 function createCard(place){
-    const list = document.getElementById("reults-list");
+    const list = document.getElementById("results-list");
     const card = document.createElement("div");
     card.className = "cafe-card";
 
@@ -115,7 +115,7 @@ function createCard(place){
         <p>${place.vicinity}</p>
         ${place.rating ? `<p class="rating">⭐ ${place.rating} / 5</p>` : ""}
         ${place.opening_hours ? `<p style="color: ${place.opening_hours.open_now ? "#6fcf97" : "#eb5757"}; margin-top:4px; font-size:0.8rem">
-            ${place.opening_hours.open_now ? "✓ COpen Now" : "✗ Closed"}
+            ${place.opening_hours.open_now ? "✓ Open Now" : "✗ Closed"}
         </p>` : ""}
     `;
 
