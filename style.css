@@ -45,7 +45,7 @@ body {
     color: #888;
 }
 
-#search-btn, #location-btn {
+#search-button, #location-button {
     padding: 10px 16px;
     border: none;
     border-radius: 8px;
@@ -56,11 +56,11 @@ body {
     transition: background 0.2s;
 }
 
-#search-btn:hover, #location-btn:hover {
+#search-button:hover, #location-button:hover {
     background: #e2a97e;
 }
 
-#location-btn {
+#location-button {
     background: #2a2a4a;
     border: 1px solid #c8956c;
 }

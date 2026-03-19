@@ -50,28 +50,28 @@ function initMap() {
     });
 }
 
-//cafe search, also with Places API
-function searchCafes(location) {
-     clearMarkers();
-     document.getElementById("results-list").innerHTML = "<p style='color:#888'>Search...</p>";
-     
-     const request = {
-        location: location,
-        radius: 1000,
-        type: "cafe"
-     };
+//cafe search, also with Places API, radius for large object problem
+function searchCafes(location, radius) {
+    clearMarkers();
+    document.getElementById("results-list").innerHTML = "<p style='color:#888'>Search...</p>";
 
-     service.nearbySearch(request, function(results, status){
+    const request = {
+        location: location,
+        radius: radius || 1000, //1km if no radius is given
+        type: "cafe"
+    };
+
+    service.nearbySearch(request, function(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-           document.getElementById("results-list").innerHTML= "";
-           results.forEach(function(place){
-            createMarker(place);
-            createCard(place);
-           });
+            document.getElementById("results-list").innerHTML = "";
+            results.forEach(function(place) {
+                createMarker(place);
+                createCard(place);
+            });
         } else {
             document.getElementById("results-list").innerHTML = "<p style='color:#c8956c'>No cafes found.</p>";
         }
-     });
+    });
 }
 
 //create own marker
@@ -114,8 +114,8 @@ function createCard(place){
         <h3>${place.name}</h3>
         <p>${place.vicinity}</p>
         ${place.rating ? `<p class="rating">⭐ ${place.rating} / 5</p>` : ""}
-        ${place.opening_hours ? `<p style="color: ${place.opening_hours.open_now ? "#6fcf97" : "#eb5757"}; margin-top:4px; font-size:0.8rem">
-            ${place.opening_hours.open_now ? "✓ Open Now" : "✗ Closed"}
+        ${place.opening_hours ? `<p style="color: ${place.opening_hours.isOpen() ? "#6fcf97" : "#eb5757"}; margin-top:4px; font-size:0.8rem">
+            ${place.opening_hours.isOpen() ? "✓ Open Now" : "✗ Closed"}
         </p>` : ""}
     `;
 
@@ -137,11 +137,24 @@ function clearMarkers() {
 //Geocoding API is important
 function geocodeAndSearch(query) {
     const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({address: query}, function(results, status){
+    geocoder.geocode({ address: query }, function(results, status) {
         if (status === "OK") {
             const loc = results[0].geometry.location;
+            const bounds = results[0].geometry.viewport; //viewport defines the area of searched location maps knows
             map.setCenter(loc);
-            searchCafes({ lat: loc.lat(), lng: loc.lng() }); 
+            map.fitBounds(bounds);
+
+            const ne = bounds.getNorthEast();
+            const sw = bounds.getSouthWest();
+            const radius = Math.min(
+                Math.max(
+                    google.maps.geometry.spherical.computeDistanceBetween(ne, sw) / 2, //computation of search radius via distance, min 1km, max 50km
+                    1000
+                ),
+                50000
+            );
+
+            searchCafes({ lat: loc.lat(), lng: loc.lng() }, radius);
         } else {
             alert("Location not found.");
         }
