@@ -1,15 +1,15 @@
-# ☕ Café Finder
+# ☕ Cafe Finder
 
-A web application that helps you find cafés near any location using Google Maps.
+A web application that helps you find cafes near any location using Google Maps.
 
 ## Features
 
 - Interactive Google Maps integration
-- Find cafés near your current location using browser geolocation
-- Search cafés by city, street, or address
-- Sidebar displaying café name, address, rating, and opening hours
-- Click a café card to zoom into its location on the map
-- Custom styled markers for each café result
+- Find cafes near your current location using browser geolocation
+- Search cafes by city, street, or address
+- Sidebar displaying cafe name, address, rating, and opening hours
+- Click a cafe card to zoom into its location on the map
+- Custom styled markers for each cafe result
 
 ## Getting Started
 
@@ -49,11 +49,11 @@ Your API key stays on your machine only.
 
 ## Usage
 
-- On load, the map centers on Amsterdam and shows nearby cafés
+- On load, the map centers on Amsterdam and shows nearby cafes
 - Use the search bar to find cafés in any city, street, or address
 - Click "My Location" to find cafés near your current position
-- Click any café card in the sidebar to zoom into that location on the map
-- Click a marker on the map to see a popup with the café details
+- Click any cafe card in the sidebar to zoom into that location on the map
+- Click a marker on the map to see a popup with the cafe details
 
 ## Built With
 
